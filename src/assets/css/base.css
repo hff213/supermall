@@ -1,3 +1,9 @@
+@import './normalize.css';
+:root{
+    --color-tint:#ff8198;
+}
 body{
-    color: red;
+  
+    margin: 0;
+    padding: 0;
 }
