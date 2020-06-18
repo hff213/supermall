@@ -1,27 +1,49 @@
 <template>
   <div>
-    <router-link tab="button" to="/home"><button>首页</button></router-link>
-    <router-link to="/category"><button>分类</button></router-link>
-    <router-link to="/cart"><button>购物车</button></router-link>
-    <router-link to="/profile"><button>我的</button></router-link>
+    <TabBar>
+      <TabBarItem path="/home">
+        <div slot="icon">
+          <img src="~assets/img/tabbar/home.svg" />
+        </div>
+        <div slot="icon-active"><img src="~assets/img/tabbar/home_active.svg"></div>
+        <div slot="text">首页</div>
+      </TabBarItem>
+      <TabBarItem path="/category">
+        <div slot="icon">
+          <img src="~assets/img/tabbar/category.svg" />
+        </div>
+          <div slot="icon-active"><img src="~assets/img/tabbar/category_active.svg"></div>
+        <div slot="text">分类</div>
+      </TabBarItem>
+      <TabBarItem path="cart">
+        <div slot="icon">
+          <img src="~assets/img/tabbar/shopcart.svg" />
+        </div>
+          <div slot="icon-active"><img src="~assets/img/tabbar/shopcart_active.svg"></div>
+        <div slot="text">购物车</div>
+      </TabBarItem>
+      <TabBarItem path="profile">
+        <div slot="icon">
+          <img src="~assets/img/tabbar/profile.svg" />
+        </div>
+          <div slot="icon-active"><img src="~assets/img/tabbar/profile_active.svg"></div>
+        <div slot="text">我的</div>
+      </TabBarItem>
+    </TabBar>
   </div>
 </template>
 
 <script>
-export default {};
+import TabBar from "components/common/tabbar/TabBar";
+import TabBarItem from "components/common/tabbar/TabBarItem";
+export default {
+  components: {
+    TabBar,
+    TabBarItem
+  }
+};
 </script>
 
 <style scoped>
-div{
-    text-align: center;
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-button{
-    display: inline;
-    margin-left: 20px;
-}
 </style>
 </style>
