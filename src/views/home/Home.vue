@@ -4,18 +4,13 @@
       <div slot="center">购物街</div>
     </navbar>
 
-    <Scroll  class="content"
-            ref="scroll"
-            :probe-type="3"
-            @scroll="contentScroll"
-            :pull-up-load="true"
-            @pullingUp="loadMore">>
+    <div  class="content">
 <home-swiper :banners="banners"></home-swiper>
 <recommendview :recommends="recommends"></recommendview>
 <feature-view></feature-view>
 <tab-control :arr="['流行','新款','精选']"></tab-control>
 
-    </Scroll>
+    </div>
 
   </div>
 </template>
@@ -27,7 +22,7 @@ import recommendview from './childComps/RecommendView'
 import HomeSwiper from './childComps/HomeSwiper'
 import FeatureView from './childComps/FeatureView'
 import TabControl from 'components/content/tabControl/TabControl'
-import Scroll from 'components/common/scroll/Scroll'
+
 export default {
   components: {
     navbar,
@@ -35,7 +30,7 @@ export default {
    HomeSwiper,
    FeatureView,
    TabControl,
-   Scroll
+
   },
   data() {
     return {
