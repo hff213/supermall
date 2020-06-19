@@ -1,6 +1,8 @@
 <template>
   <div id="tabControl" >
-<div v-for="(item,index) in arr"  @click="divClick(index)"> <span :class="{active:index==currIndex}">{{item}}</span></div>
+<div v-for="(item,index) in arr"  @click="divClick(index)"> 
+    <span :class="{active:index==currIndex}">{{item}}</span>
+    </div>
 
 
   
@@ -28,6 +30,7 @@ return fasle
 ,methods:{
 divClick(index){
 this.currIndex=index
+this.$emit('tabClick',index)
 }
 }
 }
