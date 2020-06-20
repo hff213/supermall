@@ -4,14 +4,22 @@
       <div slot="center">购物街</div>
     </navbar>
 
-    <div class="content">
+    <Scroll class="content" 
+    ref="scroll" 
+    :probe-type="3"
+     @scroll="contentScroll"
+     @pullingUp="loadMore"
+    :pullUpLoad="true"
+    >
       <home-swiper :banners="banners"></home-swiper>
       <recommendview :recommends="recommends"></recommendview>
       <feature-view></feature-view>
       <tab-control :arr="['流行','新款','精选']" class="tab-control" @tabClick="tabClick"></tab-control>
 
       <goods-list :goods="showGoods"></goods-list>
-    </div>
+     
+    </Scroll>
+     <back-top @click.native="backClick()" v-show="isShowBackTop"></back-top>
   </div>
 </template>
 
@@ -22,7 +30,8 @@ import HomeSwiper from "./childComps/HomeSwiper";
 import FeatureView from "./childComps/FeatureView";
 import TabControl from "components/content/tabControl/TabControl";
 import GoodsList from "components/content/goods/GoodsList";
-
+import Scroll from 'components/common/scroll/Scroll'
+import BackTop from 'components/content/backTop/BackTop'
 import { getHomeMultidata, getHomeGoods } from "network/home";
 export default {
   components: {
@@ -31,7 +40,9 @@ export default {
     HomeSwiper,
     FeatureView,
     TabControl,
-    GoodsList
+    GoodsList,
+    Scroll,
+    BackTop
   },
   data() {
     return {
@@ -72,6 +83,8 @@ export default {
         console.log(res);
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page = page + 1;
+        this.$refs.scroll.finishPullUp()
+         this.$refs.scroll.scroll.refresh()
       });
     },
     tabClick(index) {
@@ -86,6 +99,19 @@ export default {
           this.currentType = "sell";
           break;
       }
+    },
+    backClick(){
+     this.$refs.scroll.scrollTo(0,0,500)
+    },
+    contentScroll(position){
+    
+     this.isShowBackTop=position.y<-500
+    
+  
+    },
+    loadMore(){
+   
+      this.getHomeGoods(this.currentType)
     }
   }
 };
@@ -97,7 +123,7 @@ export default {
   color: #fff;
 }
 .content {
-  overflow: auto;
+  overflow: hidden;;
   position: absolute;
   top: 44px;
   bottom: 49px;
