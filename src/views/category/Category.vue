@@ -136,7 +136,7 @@ methods:{
 }
 </script>
 
-<style>
+<style scoped>
 .content{
   height: 100px;
 background-color:red;
