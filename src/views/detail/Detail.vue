@@ -1,12 +1,12 @@
 <template>
   <div id="detail">
      <DetailNavBar class="detail-nav"></DetailNavBar>
-     <scroll class="content">
+     <Scroll class="content"  ref="scroll" >
  <DetailSwiper :topImages="topImages"></DetailSwiper>
      <DetailBaseInfo :goods="goods"></DetailBaseInfo>
      <DetailShopInfo :shop="shop"></DetailShopInfo>
-<DetailGoodsInfo :detailInfo="detailInfo"></DetailGoodsInfo>
-     </scroll>
+<DetailGoodsInfo :detailInfo="detailInfo" @imageLoad="imageLoad"></DetailGoodsInfo>
+     </Scroll>
     
   </div>
 </template>
@@ -50,6 +50,15 @@ data(){
        this.detailInfo=data.detailInfo
        console.log(this.detailInfo)
     })
+},
+methods:{
+  imageLoad(){
+    console.log('imageLoad')
+   this.$refs.scroll.scroll.refresh()
+   setTimeout(() => {
+       this.$refs.scroll.refresh()
+   }, 1000);
+  }
 }
 }
 </script>
@@ -67,12 +76,12 @@ data(){
  background-color: white;
 }
 .content{
- height: calc(100% - 44px);
-  /* top:44px;
+ /* height: calc(100% - 44px); */
+  top:44px;
   overflow: hidden;
   position:absolute;
   left: 0;
   right: 0;
-  bottom:0; */
+  bottom:0;
 }
 </style>
