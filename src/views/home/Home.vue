@@ -64,7 +64,8 @@ export default {
       isShowBackTop: false,
   
     isTabControlShow:false,
-    saveY:0
+    saveY:0,
+    refresh:null
     };
   },
   created() {
@@ -76,10 +77,9 @@ export default {
   },
   mounted(){
    
-      const refresh=debounce(this.$refs.scroll.refresh,500)
-      this.$bus.$on('imgLoad',()=>{
-      refresh()
-    })
+     const refresh=debounce(this.$refs.scroll.refresh,500)
+     this.refresh=()=>{refresh()}
+      this.$bus.$on('imgLoad',this.refresh)
   },
   computed: {
     showGoods() {
@@ -142,7 +142,7 @@ this.$refs.scroll.scrollTo(0,this.saveY,0)
   },
   deactivated(){
     this.saveY=this.$refs.scroll.scroll.y
-    
+     this.$bus.$off('imgLoad',this.refresh)
   }
 };
 </script>

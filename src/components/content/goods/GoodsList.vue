@@ -9,7 +9,7 @@ import GoodsListItem from './GoodsListItem'
 export default {
 props:{
     goods:{
-        type:Array
+     
     }
 },
 components:{
@@ -18,7 +18,7 @@ components:{
 }
 </script>
 
-<style>
+<style scoped>
   .goods {
     display: flex;
     flex-wrap: wrap;
