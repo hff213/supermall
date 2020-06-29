@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+  </head>
+  <body>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <div id="app">
+      {{msg}}
+    </div>
+    <script>
+      const vm=new Vue({
+        el:"#app",
+        data:{
+          msg:'120223'
+        }
+      })
+
+
+
+      class Dep{
+          constructor(){
+            this.subs=[]
+          }
+          addSub(watcher){
+            this.subs.push(watcher)
+          }
+          notify(){
+            this.subs.forEach(item=>{
+              item.update()
+            })
+          }
+        }
+class Watcher{
+  constructor(name){
+    this.name=name
+  }
+  update(){
+    console.log(this.name+'发生改变')
+  }
+}
+const w1=new Watcher('张三')
+const w2=new Watcher('李四')
+
+let dep=new Dep()
+dep.addSub(w1)
+dep.addSub(w2)
+
+
+
+
+
+      let obj={
+        msg:'123'
+      }
+      Object.keys(obj).forEach(key=>{
+        let value=obj[key]
+        Object.defineProperty(obj,key,{
+          set(newValue){
+            value=newValue
+            dep.notify()
+          },
+          get(){
+            console.log('监听到获取value')
+            return value
+          }
+        })
+      })
+
+
+    </script>
+  </body>
+</html>
